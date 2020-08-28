@@ -9,6 +9,7 @@ module.exports = {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'build'),
   },
+  // ! need to update scripts in package.json if using NODE.ENV
   mode: process.env.NODE_ENV,
   module: {
     rules: [
@@ -42,11 +43,13 @@ module.exports = {
     new HtmlWebPackPlugin({
       template: './src/index.html',
       filename: './index.html'
-    })
+    }),
+    // ! might want the HotModuleReplacementPlugin
   ],
   devServer: {
     publicPath: '/',
     contentBase: './build',
+    hot: true,
     proxy: {
       '/api': 'http://localhost:3000',
     },
